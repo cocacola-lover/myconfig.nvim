@@ -9,7 +9,8 @@ vim.g.maplocalleader = ' '
 
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.statuscolumn = "%s %l %r "
+vim.opt.signcolumn = "yes"
+vim.o.scrolloff = 5
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -25,10 +26,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-
   -- NOTE: First, some plugins that don't require any configuration
   { 'echasnovski/mini.icons', version = '*' },
   'nvim-tree/nvim-web-devicons',
+  'ThePrimeagen/vim-be-good',
   {
       'windwp/nvim-autopairs',
       event = "InsertEnter",
@@ -40,9 +41,6 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-
-  require('custom.plugins.nvim_tree'),
-  require('custom.plugins.auto_session'),
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -119,16 +117,14 @@ require('lazy').setup({
       end,
     },
   },
-
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
+      vim.cmd.colorscheme "catppuccin-frappe"
+    end
   },
-
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -184,8 +180,6 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
-  require 'custom.plugins.html_util',
-
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -198,7 +192,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
