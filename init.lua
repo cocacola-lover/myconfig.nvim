@@ -29,7 +29,6 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
   { 'echasnovski/mini.icons', version = '*' },
   'nvim-tree/nvim-web-devicons',
-  'ThePrimeagen/vim-be-good',
   {
       'windwp/nvim-autopairs',
       event = "InsertEnter",
@@ -76,9 +75,6 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
-
-  -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -116,14 +112,6 @@ require('lazy').setup({
         end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
       end,
     },
-  },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme "catppuccin-frappe"
-    end
   },
   {
     -- Set lualine as statusline
@@ -268,12 +256,7 @@ require('Comment').setup {
 }
 vim.keymap.del('n', 'gc')
 vim.keymap.del('n', 'gb')
-local wk = require 'which-key'
-wk.add {
-  { 'gb', group = 'Comment toggle blockwise' },
-  { 'gc', group = 'Comment toggle linewise' },
-}
---
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -462,24 +445,6 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end
-
--- document existing key chains
-require('which-key').add {
-  { '<leader>c', group = '[C]ode' },
-  { '<leader>c_', hidden = true },
-  { '<leader>d', group = '[D]ocument' },
-  { '<leader>d_', hidden = true },
-  { '<leader>g', group = '[G]it' },
-  { '<leader>g_', hidden = true },
-  { '<leader>h', group = 'More git' },
-  { '<leader>h_', hidden = true },
-  { '<leader>r', group = '[R]ename' },
-  { '<leader>r_', hidden = true },
-  { '<leader>s', group = '[S]earch' },
-  { '<leader>s_', hidden = true },
-  { '<leader>w', group = '[W]orkspace' },
-  { '<leader>w_', hidden = true },
-}
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
