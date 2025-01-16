@@ -1,5 +1,18 @@
-  -- Useful plugin to show you pending keybinds.
 return {
+  {
+    -- Set lualine as statusline
+    'nvim-lualine/lualine.nvim',
+    -- See `:help lualine.txt`
+    opts = {
+      options = {
+        icons_enabled = false,
+        theme = 'onedark',
+        component_separators = '|',
+        section_separators = '',
+      }
+    }
+  },
+  {
     'folke/which-key.nvim',
     opts = {
       spec = {
@@ -21,4 +34,17 @@ return {
         { 'gc', group = 'Comment toggle linewise' },
       }
     },
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {}
+      vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true, desc = '[E]xplore' })
+    end,
   }
+}
