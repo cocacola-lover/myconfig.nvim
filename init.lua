@@ -135,10 +135,6 @@ require('lazy').setup({
     main = 'ibl',
     opts = {},
   },
-
-  -- "gc" to comment visual regions/lines
-  { 'JoosepAlviste/nvim-ts-context-commentstring', opts = { enable_autocmd = false } },
-  { 'numToStr/Comment.nvim' },
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
@@ -250,12 +246,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-
-require('Comment').setup {
-  pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-}
-vim.keymap.del('n', 'gc')
-vim.keymap.del('n', 'gb')
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
