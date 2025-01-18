@@ -32,5 +32,20 @@ return {
               normal_cur_line = "gYY",
           }
       }
-  }
+  },
+  {
+      'windwp/nvim-autopairs',
+      event = "InsertEnter",
+      config = true
+  },
+  {
+    -- Add indentation guides even on blank lines
+    'lukas-reineke/indent-blankline.nvim',
+    -- Enable `lukas-reineke/indent-blankline.nvim`
+    -- See `:help ibl`
+    main = 'ibl',
+    opts = {},
+  },
+  -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
 }
