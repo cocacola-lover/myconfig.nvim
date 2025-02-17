@@ -28,6 +28,9 @@ return {
               ['<C-d>'] = false,
             },
           },
+          file_ignore_patterns = {
+            "node_modules"
+          }
         },
       }
 
@@ -89,6 +92,17 @@ return {
       vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
       vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-      -- vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+      vim.keymap.set('n', '<leader>sS', function()
+        require('telescope.builtin').lsp_dynamic_workspace_symbols({
+          symbols = { "Function", "Method", "Class", "Interface", "Struct", "Enum", "Constant", "Variable" }
+        })
+      end, { desc = '[S]earch [S]ymbols' })
+
+      vim.keymap.set('n', '<leader>ss', function()
+        require('telescope.builtin').lsp_document_symbols({
+          symbols = { "Function", "Method", "Class", "Interface", "Struct", "Enum", "Constant", "Variable" }
+        })
+      end, { desc = '[S]earch document [s]ymbols' })
+      vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
     end
   }
