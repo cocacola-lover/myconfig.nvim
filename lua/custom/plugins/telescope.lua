@@ -94,7 +94,7 @@ return {
       vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sS', function()
         require('telescope.builtin').lsp_dynamic_workspace_symbols({
-          symbols = { "Function", "Method", "Class", "Interface", "Struct", "Enum", "Constant", "Variable" }
+          symbols = { "Function", "Method", "Class", "Interface", "Struct", "Enum" }
         })
       end, { desc = '[S]earch [S]ymbols' })
 
