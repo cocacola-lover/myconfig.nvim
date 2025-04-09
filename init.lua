@@ -695,6 +695,7 @@ require('lazy').setup({
             },
           },
         },
+        eslint = {},
         tailwindcss = {},
         jsonls = {
           filetypes = { 'json', 'jsonc' },
@@ -819,7 +820,14 @@ require('lazy').setup({
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
+        --
+        -- Disable with a global or buffer-local variable
+        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+          return
+        end
+
+        -- Decided to format typescriptreact using eslint. Found below
+        local disable_filetypes = { c = true, cpp = true, typescriptreact = true }
         if disable_filetypes[vim.bo[bufnr].filetype] then
           return nil
         else
@@ -1074,10 +1082,34 @@ require('lazy').setup({
   },
 })
 
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = vim.api.nvim_create_augroup('EslintFixAll', { clear = true }),
+  pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
+  command = 'silent! EslintFixAll',
+})
+
 -- [ Custom Commands ]
 vim.api.nvim_create_user_command('OpenInDefaultEditor', function()
   vim.fn.system('xdg-open ' .. vim.fn.expand '%' .. ' &')
 end, {})
+
+vim.api.nvim_create_user_command('FormatDisable', function(args)
+  if args.bang then
+    -- FormatDisable! will disable formatting just for this buffer
+    vim.b.disable_autoformat = true
+  else
+    vim.g.disable_autoformat = true
+  end
+end, {
+  desc = 'Disable autoformat-on-save',
+  bang = true,
+})
+vim.api.nvim_create_user_command('FormatEnable', function()
+  vim.b.disable_autoformat = false
+  vim.g.disable_autoformat = false
+end, {
+  desc = 'Re-enable autoformat-on-save',
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
