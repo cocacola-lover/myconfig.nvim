@@ -66,7 +66,7 @@ Kickstart Guide:
     MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
     which is very useful when you're not exactly sure of what you're looking for.
 
-  I have left several `:help X` comments throughout the init.lua
+  I have left several `:help X` comments throughout the init.luaini
     These are hints about where to find more information about the relevant settings,
     plugins or Neovim features used in Kickstart.
 
@@ -685,18 +685,6 @@ require('lazy').setup({
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-        ts_ls = {
-          init_options = {
-            preferences = {
-              importModuleSpecifierPreference = 'project-relative',
-            },
-          },
-        },
         eslint = {},
         tailwindcss = {},
         jsonls = {
@@ -829,7 +817,7 @@ require('lazy').setup({
         end
 
         -- Decided to format typescriptreact using eslint. Found below
-        local disable_filetypes = { c = true, cpp = true, typescriptreact = true }
+        local disable_filetypes = { c = true, cpp = true, typescriptreact = true, typescript = true, javascript = true }
         if disable_filetypes[vim.bo[bufnr].filetype] then
           return nil
         else
