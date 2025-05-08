@@ -962,6 +962,14 @@ require('lazy').setup({
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine',
+    config = function()
+      require('rose-pine').setup {}
+      vim.cmd.colorscheme 'rose-pine-moon'
+    end,
+  },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
@@ -996,8 +1004,6 @@ require('lazy').setup({
         return '%2l:%-2v'
       end
 
-      -- vim.o.background = 'light'
-      vim.cmd.colorscheme 'slate'
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
