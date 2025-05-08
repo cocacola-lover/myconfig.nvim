@@ -817,18 +817,22 @@ require('lazy').setup({
         end
 
         -- Decided to format typescriptreact using eslint. Found below
-        local disable_filetypes = { c = true, cpp = true, typescriptreact = true, typescript = true, javascript = true }
+        local disable_filetypes = { c = true, cpp = true }
         if disable_filetypes[vim.bo[bufnr].filetype] then
           return nil
         else
           return {
-            timeout_ms = 500,
+            timeout_ms = 1000,
             lsp_format = 'fallback',
           }
         end
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        typescriptreact = { 'prettierd', 'prettier', lsp_format = 'never', stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', lsp_format = 'never', stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', lsp_format = 'never', stop_after_first = true },
+        json = { 'prettierd', 'prettier', lsp_format = 'never', stop_after_first = true },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -1070,12 +1074,6 @@ require('lazy').setup({
       lazy = '💤 ',
     },
   },
-})
-
-vim.api.nvim_create_autocmd('BufWritePre', {
-  group = vim.api.nvim_create_augroup('EslintFixAll', { clear = true }),
-  pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
-  command = 'silent! EslintFixAll',
 })
 
 -- [ Custom Commands ]
