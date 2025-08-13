@@ -833,6 +833,7 @@ require('lazy').setup({
         typescript = { 'prettierd', 'prettier', lsp_format = 'never', stop_after_first = true },
         javascript = { 'prettierd', 'prettier', lsp_format = 'never', stop_after_first = true },
         json = { 'prettierd', 'prettier', lsp_format = 'never', stop_after_first = true },
+        html = { 'prettierd', 'prettier', lsp_format = 'never', stop_after_first = true },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
